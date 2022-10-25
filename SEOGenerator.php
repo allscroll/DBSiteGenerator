@@ -31,7 +31,7 @@ class SEOGen
     /**
      * Генерация seo keywords
      */
-    public static function getSeoDescription( string $text ): string
+    public static function getSeoKeywords( string $key ): string
     {
         $templates = [];
 
@@ -42,9 +42,12 @@ class SEOGen
 
         $res = [];
         foreach ( $randTemplateIds as $id ) {
-            $res[] = $templates[ $id ];
+            
+            $template = str_replace( "#KEY#", $key, $templates[ $id ] );
+            
+            $res[] = $template;
         }
 
-        return $res;
+        return implode( ', ', $res );
     }
 }
