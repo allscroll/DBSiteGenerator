@@ -38,8 +38,13 @@ class SEOGen
         shuffle( $templates );
         $randNum = mt_rand(3, 5);
 
-        array_rand( $prefix, $randNum );
+        $randTemplateIds = array_rand( $prefix, $randNum );
 
+        $res = [];
+        foreach ( $randTemplateIds as $id ) {
+            $res[] = $templates[ $id ];
+        }
 
+        return $res;
     }
 }
