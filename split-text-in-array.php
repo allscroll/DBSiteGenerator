@@ -4,24 +4,23 @@
 
 $text = file_get_contents( 'text.txt' );
 
+// удаление переносов
 $text = preg_replace( "#\s{2,}#", "", $text );
-
-// echo $text;
-
-// echo '<br><br><br>';
 
 $text = strip_tags( $text );
 
+// разбивка в массив по точке, воскл.зн. либо знаку вопроса
 $res = preg_split( "#[?!.]+#", $text, 0, PREG_SPLIT_NO_EMPTY );
 
-// array_walk( $res, 'trim' );
-
+// проходим trim по массиву
 $res = array_map( 'trim', $res );
 
+// убираем предложения короче 100 символов
 $res = array_filter( $res, function( $el ) {
     return strlen( $el ) > 100;
 } );
 
+// оставляем только то, что начинается с заглавной буквы
 $res = array_filter( $res, function( $el ) {
     return preg_match( "#^[A-Z]#", $el );
 } );
