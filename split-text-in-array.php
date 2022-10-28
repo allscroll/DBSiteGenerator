@@ -13,7 +13,11 @@ $text = strip_tags( $text );
 $res = preg_split( "#[?!.]+#", $text, 0, PREG_SPLIT_NO_EMPTY );
 
 // проходим trim по массиву
-$res = array_map( 'trim', $res );
+// $res = array_map( 'trim', $res );
+// или так
+array_walk( $res, function( &$el ) {
+    $el = trim( $el );
+} );
 
 // убираем предложения короче 100 символов
 $res = array_filter( $res, function( $el ) {
@@ -23,6 +27,11 @@ $res = array_filter( $res, function( $el ) {
 // оставляем только то, что начинается с заглавной буквы
 $res = array_filter( $res, function( $el ) {
     return preg_match( "#^[A-Z]#", $el );
+} );
+
+// удаляем с вхождением нежелательных символов
+$res = array_filter( $res, function( $el ) {
+    return !preg_match( "#[\"]#", $el );
 } );
 
 echo '<pre>';
