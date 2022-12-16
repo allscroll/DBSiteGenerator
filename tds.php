@@ -1,3 +1,18 @@
+
+/go/aldara
+
+в htaccess
+
+смотрит что /go/ нужно редиректить на тдс
+но нужно вытащить aldara
+и слать на 
+	tds.ru/rout.php?key=
+
+### htaccess
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/go/([^&]+)/$
+RewriteRule ^(\/go\/)$ http://tds.ru/rout.php?key=$1 [R=302,L]
+
 <?php
 
 define( 'DEFAULT_SHOP', 'http://site.com' );
